@@ -3,6 +3,7 @@
 This repository contains the code I used in google colab to train a machine learning model that can detect the vocalization of Killer Whales in live hydrophone data. It includes the code I used to retrieve the dataset from an s3 web bucket, the code that was used to split the raw WAV files into just the target and background noise, and the code that sets up package dependancies/fixes compatibility errors before actually running the training and prediction scripts.
 I used the open source (ANIMAL-SPOT)[https://github.com/ChristianBergler/ANIMAL-SPOT] repository to create my model. It is a generalized framework for bioacoustic signal detection through machine learning that has proven effective for many different species. This repository was created by Christian Bergler and his associates at the Friedrich Alexander University. Thank you to Christian and his team for their contribution that made my project possible!
 The Data used from training was sourced from the (Orcasound)[https://www.orcasound.net/] project, which is an open source project which seeks to make avaialable to the public live data from hydrophones located in the salish sea. Information on how to access this live data, as well as curated datasets for machine learning (such as the one used for this project) can be found (in their github repository.)[https://github.com/orcasound/orcadata]
+I made frequent use of GPT-4 and Claude 3 to help me write my code and fix bugs throughout the project. Credit to OpenAI and Anthropic for the creation of these models that were extremely useful in the creation of this project.
 ## Data Understanding
 The data used in this project was sourced from the Orcasound project, as stated above. Specifically, a curated dataset specifically for training detection ML models was used. The dataset is composed of a large number of hydrophone recordings that contain Killer Whale vocalizations with their start time and duration labeled in a separate TSV file. Due to the size and nature of the data it is difficult to provide overview statistics that describe it, but it is safe to say that the dataset contains a wide variety of vocalizations in a wide variety of contexts.
 The data was retrieved using AWS CLI. Several python scripts were used to separate the original sound files into labeled clips that contain only target signals or background noise according to the original labels. The final model was trained, tested, and validated on a randomly selected subset of 25% of the total data composed of 66% noise and 33% target signals to optimize the model's training time and size.
@@ -35,3 +36,16 @@ As stated above, this project is not perfect and there are several ways I plan t
 - Retrain the model with more data that has been better curated. A wider variety of examples of background noise will help prevent the false positives that are occuring. It may also be beneficial to ensure as many different types of Orca vocalization/acoustic communication are present in the training data as possible once I have catalogued these sounds.
 - Create a webapp that will retrieve the live hydrophone data and label it on demand. It is unlikely that this webapp will constantly run due to server costs, but I would like a publicly available demonstration of the project to be available.
 - Integrate this model into a larger pipeline for the analysis of Orca vocalizations. The original scope of the project included creating a clustering model that identifies different types of vocalizations within the target signals, and then to use that clustered data to train a neural network that directly detects and classifies acoustic communications. The scope of the project had to be reduced partway through due to difficulties encountered in running the ANIMAL-SPOT code which were time-consuming to overcome. The ultimate goal of the project is to create a framework that can be run online and used in real time to detect and classify the vocalizations of the animals so that researchers can label them with appropriate context and determine their meaning.
+# Navigation
+All of the code used in this project is stored in the ipynb files in this repository. They are:
+- Data_Loading.ipynb
+- Signal_split.ipynb
+- Animal_Spot.ipynb
+- Animal_Spot_Eval.ipynb
+
+The configuration files used for Training, Prediction, and Evaluation are labeled as the following in this repository:
+- config-train
+- config-prediction
+- config-evaluation
+
+The images in this markdown file are stored in the Images subfolder. A presentation of the project is saved in the repository as Presentation.pdf
