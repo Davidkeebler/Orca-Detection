@@ -19,14 +19,14 @@ The parameters for the Training, Prediciton, and Evaluation scripts of the ANIMA
 ## Results
 The final version of the model had a test accuracy of 84% at the conclusion of training. An example graph showing the model's accuracy as it progressed through epochs and the final confusion matrix can be found below.
 
-![](https://github.com/Davidkeebler/Emotions_dataset_ML/blob/main/Images/train_vs_val.png)
+![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/train_vs_val.png)
 
-![](https://github.com/Davidkeebler/Emotions_dataset_ML/blob/main/Images/confusion_matrix.png)
+![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/confusion_matrix.png)
 
 ## Example Spectrogram
 Below is an example of the model's labeling capacity. It is demonstrated on one of the original files from the training dataset that has not been segmented into target and noise files. The numbered boxes indicate where the model predicts there is a call. The model does not always detect the calls (especially when they are intermixed with static, or are exceptionally low or high volume) but false positives are quite rare, and are actually predictable. The model tends to predict completely blank spectrograms as calls, and we could create an extra script to fix this issue and increase the model's effectiveness. With that additional change and by lowering the model's detection threshold, it should be more than sufficient to expanding the amount of orca call data available to researchers for machine learning.
 
-![](https://github.com/Davidkeebler/Emotions_dataset_ML/blob/main/Images/example_spectrogram.png)
+![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/example_spectrogram.png)
 
 # Analysis and Conclusions
 As is clear from the example spectrogram, my final model is not perfect - false negatives are common, and false positives are rare but do occur. However, for the model's intended use case, it is good enough - it is quite rare for the model to detect a signal where one is not present, and it is unlikely that occasionally missing signals in live data will present a problem. 
