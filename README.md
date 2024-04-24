@@ -12,26 +12,26 @@ The Data used from training was sourced from the (Orcasound)[https://www.orcasou
 I made frequent use of GPT-4 and Claude 3 to help me write my code and fix bugs throughout the project. Credit to OpenAI and Anthropic for the creation of these models that were extremely useful in the creation of this project! These LLMs were instrumental in my understanding of the technical material and fixing persistent technical issues I encountered.
 
 ## Data Understanding
-The data used in this project was sourced from the Orcasound project, as stated above. Specifically, a curated dataset specifically for training detection ML models was used. The dataset is composed of a large number of hydrophone recordings that contain Killer Whale vocalizations with their start time and duration labeled in a separate TSV file. Due to the size and nature of the data it is difficult to provide overview statistics that describe it. 
+The data used in this project was sourced from the **Orcasound** project, as stated above. Specifically, a **curated dataset** specifically for training detection ML models was used. The dataset is composed of a large number of hydrophone recordings that contain Killer Whale vocalizations with their start time and duration labeled in a separate TSV file. Due to the size and nature of the data, **it is difficult to provide overview statistics that describe it.** 
 However, the data that composes the corpus was chosen because contains a wide variety of vocalizations in a wide variety of contexts.
 
 The data was retrieved using AWS CLI using the code in the "Data_Loading" Notebook in this repository.
 
-The code in the "Signal_Split" notebook was used to separate the original unsegmented sound files into labeled clips that contain only target signals or background noise according to the original labels. This code renders the sound files into a format that animal-spot will accept.
+The code in the "Signal_Split" notebook was used to separate the original unsegmented sound files into labeled clips that contain only target signals or background noise according to the original labels. **This code renders the sound files into a format that animal-spot will accept.**
 
-The final model was trained, tested, and validated on a randomly selected subset of 25% of the total data composed of 66% noise and 33% target signals to optimize the model's training time and size. The code that selects this subset in a reproducible manner can also be foud in the "Signal_Split" notebook.
+The final model was trained, tested, and validated on a randomly selected **subset** of 25% of the total data, composed of **66% noise and 33% target signals** to optimize the model's training time and size. The code that selects this subset in a reproducible manner can also be foud in the "Signal_Split" notebook.
 
 ## Notebooks, Google Colab, and Google Drive
-As mentioned above, much of the code for this project created with the assistance of ChatGPT and Claude 3. The code is split across three separate google colab notebooks, and an additional fourth notebook which generated relevant visualizations related to the results. They have been downloaded and saved in this respository. 
+As mentioned above, **much of the code for this project created with the assistance of ChatGPT and Claude 3.** The code is split across three separate google colab notebooks, and an additional fourth notebook which generated relevant visualizations related to the results. They have been downloaded and saved in this respository. 
 
-The notebooks can either be run locally, or directly accessed in google drive and copied with the links below. I would recommend just copying the notebooks in google drive, as I did all of my experimentation and training in google drive as well.
+The notebooks can either be run locally, or directly accessed in google drive and copied with the links below. I would recommend just **copying the notebooks in google drive**, as I did all of my experimentation and training in google drive as well.
 
 - The "Data_Loading" notebook was used to retrieve the data from S3. 
 - The "Signal_Split split the original WAV files into labeled segments named in the proper format for Animal-Spot. Then, it selects the subset of the data that was used for training.
 - The "Animal_Spot" notebook contains code that will install the correct version of dependancies. It contains code to run the training, prediction, and evaluation scripts.
 - The "Animal_Spot_Eval" notebook contains the code that was used to generate the visualizations used in this readme file and the final presentation.
 
-The files were stored in Google Drive for convenience and integration with Colab. This way of doing the project was wasteful and more expensive than it needed to be - a premium subscription is required for both Google Drive and Google Colab to store the data and actually run the training with a TPU. A better way of doing this project would be to learn how to configure an Amazon EC2 instance and run the training and prediction there instead. EC2 has a greater availability of compute power than Google Colab, and if I had started doing the project in EC2 from the beginning it would have made it simple to build and deploy a webapp that uses the final model.
+The files were stored in Google Drive for convenience and integration with Colab. **This way of doing the project was wasteful and more expensive than it needed to be** - a premium subscription is required for both Google Drive and Google Colab to store the data and actually run the training with a TPU. A better way of doing this project would be to learn how to **configure an Amazon EC2 instance and run the training and prediction there instead**. EC2 has a greater availability of compute power than Google Colab, and if I had started doing the project in EC2 from the beginning it would have made it simple to build and deploy a webapp that uses the final model.
 
 Links to the colabs the notebooks were saved from:
 - https://colab.research.google.com/drive/1AM6J2YwNfKuJQ_Yn_yKGP0wGy8au2Kc7?usp=sharing (Animal_Spot)
@@ -40,31 +40,36 @@ Links to the colabs the notebooks were saved from:
 - https://colab.research.google.com/drive/16Nd05dEy0YiS1Rng6d6d_z4dkgswGPP_?usp=sharing (Animal_Spot_Eval)
 
 ## Methodology and Training, Prediction, and Evaluation parameters.
-As stated above, the final model was trained on a subset of the total dataset in order to reduce the model's training time. A ratio of 2:1 of noise:target was selected due to the high ratio of background noise to target signals in live hydrophone data. A configuration option which removed empty  noise files was enabled, which resulted in a final ratio of about 1.8:1 noise:target.
+As stated above, the final model was trained on a **subset of the total dataset** in order to reduce the model's training time. A ratio of 2:1 of noise:target was selected due to the high ratio of background noise to target signals in live hydrophone data. A configuration option which removed empty  noise files was enabled, which resulted in a final ratio of about 1.8:1 noise:target.
 
-The parameters for the Training, Prediciton, and Evaluation scripts of the ANIMAL-SPOT respository used in this project are contained in this respoistory's labeled config files. To use them, place each config file in the Training, Prediction, or Evaluation folders of the ANIMAL-SPOT respository according to their label, and then rename them to 'config'. 
+The parameters for the Training, Prediciton, and Evaluation scripts of the ANIMAL-SPOT respository used in this project are contained in this respoistory's labeled config files. To use them, **place each config file in the Training, Prediction, or Evaluation folders of the ANIMAL-SPOT respository according to their label, and then rename them to 'config'**. 
 (insert extensive coverage of justification for each choice of parameter)
 
 ## Results
-The final version of the model had a test accuracy of 84% at the conclusion of training. An example graph showing the model's accuracy as it progressed through epochs and the final confusion matrix can be found below.
+The final version of the model had a **test accuracy of 84%** at the conclusion of training. An example graph showing the model's accuracy as it progressed through epochs and the final confusion matrix can be found below. This statistic is not reflective of the model's final performance, as **the accuracy can be improved by lowering the prediction threshold of the model.**
 
 ![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/train_vs_val.png)
 
 ![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/confusion_matrix.png)
 
 ## Example Spectrogram
-Below is an example of the model's labeling capacity. It is demonstrated on one of the original files from the training dataset that has not been segmented into target and noise files. None of the segments from this original file were used in the training of the model.
+Below is an example of the model's labeling capacity. It is demonstrated on one of the original files from the training dataset that has not been segmented into target and noise files. **None of the segments from this original file were used in the training of the model.**
 
-The numbered boxes indicate where the model predicts there is a call. The model does not always detect the calls (especially when they are intermixed with static, or are exceptionally low or high volume) but false positives are quite rare, and are actually predictable. Because of the configuration option to remove blank spectrograms, the model is only exposed to blank spectrograms in the call data (if anywhere at all). This results in the model predicting blank/empty segments of the spectrogram as calls. We could create an extra script to fix this issue and increase the model's effectiveness. 
+**The numbered boxes indicate where the model predicts there is a call.** The model does not always detect the calls (especially when they are intermixed with static, or are exceptionally low or high volume) but **false positives are quite rare**, and are actually predictable. Because of the configuration option to remove blank spectrograms, the model is only exposed to blank spectrograms in the call data (if anywhere at all). This results in the model predicting blank/empty segments of the spectrogram as calls. We could create an extra script to fix this issue and increase the model's effectiveness. 
 
-False negatives are more common, but are less concerning. Researchers may miss potential calls in the data, but if we run this script to analyze live hydrophone data 24/7, we will still get a lot of high-quality data. 
+False negatives are more common, but are **less concerning**. Researchers may miss potential calls in the data, but if we run this script to analyze live hydrophone data 24/7, we will still get a lot of high-quality data. 
 
 With the addition of a script that detects empty segments of the spectrograms and ensures they are marked as noise, we can safely increase the sensitivty of the model by lowering its detection threshold and further increase the accuracy of the model. This is on the to-do list for expanding the project.
 
 ![](https://github.com/Davidkeebler/Orca-Detection/blob/main/Images/example_spectrogram.png)
 
 # Analysis and Conclusions
-As is clear from the example spectrogram, my final model is not perfect - false negatives are common, and false positives are rare but do occur. However, for the model's intended use case, it is good enough. The occurence of these false positives and false negatives only slightly detract from the model's performance, and can even be compensated for in some cases. With an additional step of quick human verification, this model is still capable of saving bioacoustic researchers a lot of time in the process of labeling orca vocalizations in raw hydrophone data. 
+As is clear from the example spectrogram, my final model is not perfect - false negatives are common, and false positives are rare but do occur. However, for the model's intended use case, it is good enough. The occurence of these false positives and false negatives only slightly detract from the model's performance, and can even be compensated for in some cases. With an additional step of quick human verification, this model is still capable of saving bioacoustic researchers **a lot of time** in the process of labeling orca vocalizations in raw hydrophone data.
+
+Here are some suggestions about how researchers and coservationists can use this model:
+- Expanding the amount of labeled orca vocalization data. Live hydrophone recordings could be automatically collected and analyzed by this model to provide a starting point for this process.
+- Detecting the presence of orcas in the vicinity of commercial ships. Collisions and other harmful events could be prevented by an early warning system that alerts captains to the presence of the whales, aiding conservation efforts. This system could be further improved by the addition of directional microphones.
+- Easily segment out the orca calls while observing them live in the field so that better data about the context of their vocalizations can be recorded. A program could be created that listens to hydrophones on a boat the researchers are on, detects the orca vocalizations, and then creates a popup asking the researcher to record the context of the vocalization. This would aid in research into the communication of these animals.
 
 # Next Steps
 As stated above, this project is not perfect and there are several ways I plan to improve it in the future. Here are a few improvements I plan to make and expansions to the scope of the project which will eventually be completed:
@@ -75,13 +80,13 @@ As stated above, this project is not perfect and there are several ways I plan t
 - The scope of the project had to be reduced partway through due to difficulties encountered in running the ANIMAL-SPOT code which were time-consuming to overcome. The ultimate goal of the project is to create a framework that can be run online and used in real time to detect and classify the vocalizations of the animals so that researchers can label them with appropriate context and determine their meaning.
 
 # Navigation
-All of the code used in this project is stored in the ipynb files in this repository. They are:
+All of this project's code is stored in notebooks in the "Notebooks" folder. The names of the notebooks are:
 - Data_Loading.ipynb
 - Signal_split.ipynb
 - Animal_Spot.ipynb
 - Animal_Spot_Eval.ipynb
 
-The configuration files used for Training, Prediction, and Evaluation are labeled as the following in this repository:
+The configuration files used for Training, Prediction, and Evaluation are stored in the "Configs" folder. They are labeled as the following in this repository:
 - config-train
 - config-prediction
 - config-evaluation
