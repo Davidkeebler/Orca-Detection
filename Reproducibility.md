@@ -1,6 +1,8 @@
 # Reproducibility
 Extensive measures have been taken to ensure the reproducibility of results in google colab for this project. If you attempt to reproduce these results on a local computer or EC2 instance, you may experience additional difficulties.
 
+An extra notebook Orca_Detection_Easy_Reproducibility.ipynb has been included to make reproducibility of the project easier to verify. While this notebook can be run locally, it will encounter some errors. If it is run in [google colab](https://colab.research.google.com/drive/1CXfPAcJs8CZ6E-M_ryOL4IIlaz2HLbOl?usp=sharing), you can simply input your kaggle credentials and then run all of the cells.
+
 ## Data retrieval and segmenting
 For retrieving, segmenting, and splitting the data, the notebooks in this repository will work perfectly fine in colab without any additional tweaking other than adding your own AWS credentials. In an environment other than colab, you will need to ignore the cells that mount google drive to the notebook and replace all directories in the notebook with directories that are appropriate for your local computer or server instance.
 

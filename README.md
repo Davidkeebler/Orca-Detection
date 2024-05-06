@@ -30,6 +30,7 @@ The notebooks can either be run locally, or directly accessed in google drive an
 - The "Signal_Split split the original WAV files into labeled segments named in the proper format for Animal-Spot. Then, it selects the subset of the data that was used for training.
 - The "Animal_Spot" notebook contains code that will install the correct version of dependancies. It contains code to run the training, prediction, and evaluation scripts.
 - The "Animal_Spot_Eval" notebook contains the code that was used to generate the visualizations used in this readme file and the final presentation.
+- "Orca_Detection_Easy_Reproducibility.ipynb" will allow users to easily reproduce the results of my project with one click and no hassle.
 
 The files were stored in Google Drive for convenience and integration with Colab. **This way of doing the project was wasteful and more expensive than it needed to be** - a premium subscription is required for both Google Drive and Google Colab to store the data and actually run the training with a TPU. A better way of doing this project would be to learn how to **configure an Amazon EC2 instance and run the training and prediction there instead**. EC2 has a greater availability of compute power than Google Colab, and if I had started doing the project in EC2 from the beginning it would have made it simple to build and deploy a webapp that uses the final model.
 
@@ -38,6 +39,7 @@ Links to the colabs the notebooks were saved from:
 - https://colab.research.google.com/drive/1WNbXQsQeiuD7OeQvzeuSgfWUFQrUOlAU?usp=sharing (Signal_Split)
 - https://colab.research.google.com/drive/1G5lpYvgDKOqNJ2fNwEL7p-3xB3jvo0--?usp=sharing (Data_Loading)
 - https://colab.research.google.com/drive/16Nd05dEy0YiS1Rng6d6d_z4dkgswGPP_?usp=sharing (Animal_Spot_Eval)
+- https://colab.research.google.com/drive/1CXfPAcJs8CZ6E-M_ryOL4IIlaz2HLbOl?usp=sharing (Orca_Detection_Easy_Reproducibility)
 
 ## Methodology and Training, Prediction, and Evaluation parameters.
 As stated above, the final model was trained on a **subset of the total dataset** in order to reduce the model's training time. A ratio of 2:1 of noise:target was selected due to the high ratio of background noise to target signals in live hydrophone data. A configuration option which removed empty  noise files was enabled, which resulted in a final ratio of about 1.8:1 noise:target.
@@ -85,6 +87,7 @@ All of this project's code is stored in notebooks in the "Notebooks" folder. The
 - Signal_split.ipynb
 - Animal_Spot.ipynb
 - Animal_Spot_Eval.ipynb
+- Orca_Detection_Easy_Reproducibility.ipynb
 
 The configuration files used for Training, Prediction, and Evaluation are stored in the "Configs" folder. They are labeled as the following in this repository:
 - config-train
